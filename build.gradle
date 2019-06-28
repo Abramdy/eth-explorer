@@ -1,0 +1,59 @@
+plugins {
+  id "com.google.cloud.tools.jib" version "0.9.11"
+  id 'org.springframework.boot' version '2.2.0.M3'
+  id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'bexchange'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+  maven { url 'https://repo.spring.io/snapshot' }
+  maven { url 'https://repo.spring.io/milestone' }
+}
+
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  runtimeOnly 'org.postgresql:postgresql'
+  testImplementation('org.springframework.boot:spring-boot-starter-test') {
+    exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    exclude group: 'junit', module: 'junit'
+  }
+  testImplementation 'org.springframework.kafka:spring-kafka-test'
+
+  implementation 'com.h2database:h2:1.4.199'
+  implementation 'org.postgresql:postgresql:42.2.5'
+  implementation 'org.json:json:20180813'
+  implementation 'org.web3j:core:3.2.0'
+
+  implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation 'org.springframework.boot:spring-boot-starter'
+//  implementation 'org.springframework.data:spring-data-elasticsearch:3.0.0.RC2'
+  implementation 'org.springframework.data:spring-data-elasticsearch'
+  implementation 'org.elasticsearch:elasticsearch'
+  implementation 'org.elasticsearch.client:transport'
+
+  implementation("org.springframework:spring-context-support")
+  implementation 'org.springframework.security:spring-security-messaging'
+  implementation 'org.springframework:spring-context-support'
+  implementation 'org.springframework.security:spring-security-core'
+  implementation 'org.springframework:spring-jms:5.0.3.RELEASE'
+  implementation 'org.springframework.amqp:spring-rabbit'
+}
+
+test {
+  useJUnitPlatform()
+}
+
+build.doLast {
+  copy {
+    from 'src/main/docker/'
+    into "${buildDir}/libs/"
+  }
+}

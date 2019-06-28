@@ -1,0 +1,226 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.1.0",
+    "title": "Ethereum Explorer"
+  },
+  "paths": {
+    "/balance/{address}": {
+      "get": {
+        "tags": [
+          "balance"
+        ],
+        "description": "Return balances for an address",
+        "operationId": "addressBalance",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "description": "Ethereum Address\n",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Balance from Ethereum",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/balance/{tokenAddress}/{address}": {
+      "get": {
+        "tags": [
+          "balance"
+        ],
+        "description": "Return balances for an Token of a specific address",
+        "operationId": "tokenBalance",
+        "parameters": [
+          {
+            "name": "tokenAddress",
+            "in": "path",
+            "description": "Ethereum Token Address          \n",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "address",
+            "in": "path",
+            "description": "Ethereum Address          \n",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Balance from Ethereum",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/blocknumber": {
+      "get": {
+        "tags": [
+          "block"
+        ],
+        "description": "Get current Ethereum Blocknumber",
+        "operationId": "blocknumber",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Block Number",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blocknumber/{blockNumber}": {
+      "post": {
+        "tags": [
+          "block"
+        ],
+        "description": "Process block",
+        "operationId": "processBlock",
+        "parameters": [
+          {
+            "name": "blockNumber",
+            "in": "path",
+            "description": "Block Number\n",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Block Number",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/token/{address}": {
+      "get": {
+        "tags": [
+          "balance"
+        ],
+        "description": "Return Token Details from Ethereum ERC20 smart contract",
+        "operationId": "tokenDetail",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "description": "Ethereum Address\n",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Token Details from Ethereum ERC20 smart contract",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/txs/detail/{txId}": {
+      "get": {
+        "tags": [
+          "transactions"
+        ],
+        "description": "Return a Transaction Detail",
+        "operationId": "transactionDetail",
+        "parameters": [
+          {
+            "name": "txId",
+            "in": "path",
+            "description": "Ethereum Transaction Id\n",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transaction Detail",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/txs/{address}": {
+      "get": {
+        "tags": [
+          "transactions"
+        ],
+        "description": "Return Transactions from an Ethereum address",
+        "operationId": "transactions",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "description": "Ethereum Address          \n",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transactions",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/watch/{address}": {
+      "post": {
+        "tags": [
+          "watch"
+        ],
+        "description": "Add an Ethereum address on block watch list",
+        "operationId": "watch",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "description": "Ethereum Address          \n",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Balance from Ethereum",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {}
+}

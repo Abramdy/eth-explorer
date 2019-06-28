@@ -1,0 +1,21 @@
+version: '2'
+volumes:
+  explorer_logs:
+  elasticsearch_data:
+services:
+  explorer:
+    build: ../build/libs
+    environment:
+      - "EXPLORER_FROM_BLOCKNUMBER=1791000"
+      - "ELASTICSEARCH_CLUSTERNAME=app-monitor"
+      - "ELASTICSEARCH_SRV=elasticsearch"
+      - "ELASTICSEARCH_PORT=9300"
+      - "RABBIT_SRV=rabbit"
+      - "RABBIT_PORT=5672"
+      - "RABBIT_USERNAME=guest"
+      - "RABBIT_PASSWORD=guest"
+      - "INFURA_KEY=xxx"
+    ports:
+      - "8000:8000"
+    volumes:
+      - explorer_logs:/logs

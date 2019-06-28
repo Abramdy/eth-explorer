@@ -1,0 +1,47 @@
+version: '2'
+volumes:
+  elasticsearch_data:
+services:
+  elasticsearch:
+    cap_add:
+      - IPC_LOCK
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true
+      - network.host=_site_
+      - discovery.zen.ping.unicast.hosts=elasticsearch
+      - cluster.name=app-monitor
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      - path.data=/usr/share/elasticsearch/data/$${HOSTNAME}
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.0.0
+    labels:
+      io.rancher.scheduler.affinity:host_label_soft: "server=slave-04"
+      io.rancher.container.hostname_override: "container_name"
+      io.rancher.sidekicks: sysctl
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+  sysctl:
+    environment:
+      - SYSCTL_KEY=vm.max_map_count
+      - SYSCTL_VALUE=262144
+    image: rawmind/alpine-sysctl:0.1
+    labels:
+      io.rancher.scheduler.affinity:host_label_soft: "server=slave-04"
+      io.rancher.container.hostname_override: "container_name"
+      io.rancher.container.start_once: "true"
+    network_mode: none
+    privileged: true
+#  kibana:
+#    image: docker.elastic.co/kibana/kibana-oss:6.0.0
+#    labels:
+#      io.rancher.scheduler.affinity:host_label_soft: "server=slave-04"
+#      io.rancher.container.hostname_override: "container_name"
+#    ports:
+#    - "5601:5601"
