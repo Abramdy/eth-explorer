@@ -70,10 +70,13 @@ FALTANTE
 
 Vejo algumas alternativas:
 
-1 - Contratar um serviço de Block Explorer como ethscan.io
-2 - Usar um servico gratuito de Block Explorer como ethscan.io
-3 - Criar um micro serviço que faz a leitura dos blocks a partir de um endereço
-4 - Manter infra para rodar o geth e encontrar uma outra forma de indexar o seu blockchain
+    1 - Contratar um serviço de Block Explorer como ethscan.io
+
+    2 - Usar um servico gratuito de Block Explorer como ethscan.io
+
+    3 - Criar um micro serviço que faz a leitura dos blocks a partir de um endereço
+
+    4 - Manter infra para rodar o geth e encontrar uma outra forma de indexar o seu blockchain
 
 As duas primeiras opções podem ser usadas para acelerar o processo de desenvolvimento e
 testes, no entanto, para termos qualidade penso que o 3 item pode ser o caminho para o
